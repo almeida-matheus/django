@@ -1,0 +1,88 @@
+{% extends './model.html' %}
+{% load bootstrap %}
+{% block content %}
+{% block estilo %}
+<style>
+    body{
+        background-color: #DCDCDC;
+    }
+    /*
+    .card{
+        box-shadow: 10px 10px 10px;
+    }
+    
+    .card-text{
+        font-size: 20px;
+    }
+    */
+</style>
+
+
+{% endblock %}
+<div class="container"> <!--adicionar margem-->
+    <h1 class="text-center font-weight-bold my-3">To do App Django</h1>
+    <!--
+    <form method="post"> {% csrf_token %}
+
+        {{form.conteudo|bootstrap}}
+        <button class="btn btn-success" type="submit"> Enviar </button>
+    </form>
+    -->
+
+    <form class="form-inline" method="post"> {% csrf_token %}
+        
+        <div class="input-group mb-3 w-100">
+            {{form.conteudo}}
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Enviar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for conteudo_bd in conteudos_bd%}
+
+        <div class="col-12 col-sm-6 col-md-4 mt-3 d-flex justify-content-center">
+            <div class="card box-shadow shadow-lg mb-5" style="width: 18rem;">
+                
+                <div class="card-header mb-0 pb-0">
+                    <p>Tarefa | {{conteudo_bd.data}}</p>
+                </div>
+
+                <div class="card-body">
+                    <p class="card-text">
+                        {{conteudo_bd.conteudo}}
+                    </p>
+                </div>
+                
+                
+                <div class="card-footer d-flex justify-content-center align-items-center">
+                    <div class="btn-group">
+                        <form action="../tarefas/delete/{{conteudo_bd.id}}" method="post"> {% csrf_token %}
+                            <a class="btn btn-primary" href="../tarefas/edit/{{conteudo_bd.id}}">Editar</a>
+                            <button class="btn btn-danger" type="submit"> Deletar </button>
+            
+                        </form>
+                    </div>
+                        
+                    
+                </div>
+                <div class="card-footer d-flex justify-content-center align-items-center">
+                    {% if conteudo_bd.completado == True %}
+                    <strong> ✔️ tarefa completada </strong>
+                    {% endif %}
+                    {% if conteudo_bd.completado == False %}
+                    <strong> ✖ tarefa não completada </strong>
+                    {% endif %}
+                </div>
+
+    
+            </div>
+        </div>
+        {% endfor %}
+        {% endblock %}
+    </div>
+
+</div>

@@ -1,0 +1,23 @@
+{% extends './model.html'%}<!--herdar o design responsivel do model-->
+{% load bootstrap %}<!--classe dos formularios do bootstrap--> 
+{% block content%}
+<div class="container mt-2">
+    <div class="card box-shadow shadow-lg">
+        <div class='card-header bg-info'>
+            <p class='lead text-white mb-0 pb-0'>Edite o conteudo dessa lista</p>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <div class="card-footer">
+                    <button class="btn btn-success" type="submit">Confirmar</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+{% endblock%}
+
+
